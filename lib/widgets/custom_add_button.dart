@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
-class Custom_add_button extends StatelessWidget {
-  const Custom_add_button({
+class CustomAddButton extends StatelessWidget {
+  const CustomAddButton({
     super.key,
+    this.onPressed,
   });
-
+  final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width,
       height: 55,
       child: ElevatedButton(
@@ -15,9 +16,9 @@ class Custom_add_button extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16), // Border radius
             ),
-            backgroundColor: Color(0xFF63FFDA)),
-        onPressed: () {},
-        child: Text(
+            backgroundColor: const Color(0xFF63FFDA)),
+        onPressed: onPressed,
+        child: const Text(
           'Add',
           style: TextStyle(
               color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
