@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notes_app/cubit/notes_cubit/notes_cubit_cubit.dart';
+import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/views/edit_note_view.dart';
 
 class NoteItem extends StatelessWidget {
-  const NoteItem({super.key});
-
+  const NoteItem({super.key, required this.note});
+  final NoteModel note;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -23,20 +26,23 @@ class NoteItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               ListTile(
-                title: const Text(
-                  'Flutter Tips',
+                title: Text(
+                  note.title,
                   style: TextStyle(fontSize: 30, color: Colors.black),
                 ),
                 subtitle: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   child: Text(
-                    'Build your cateer with tharwat samy',
+                    note.subTitle,
                     style: TextStyle(
                         fontSize: 20, color: Colors.black.withOpacity(0.5)),
                   ),
                 ),
                 trailing: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    note.delete();
+                    BlocProvider.of<NotesCubitCubit>(context).fetchNotes();
+                  },
                   icon: const Icon(
                     Icons.delete,
                     color: Colors.black,
@@ -47,7 +53,7 @@ class NoteItem extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(right: 16.0),
                 child: Text(
-                  '22 may, 2022',
+                  note.date,
                   style: TextStyle(
                     color: Colors.black.withOpacity(0.5),
                   ),
