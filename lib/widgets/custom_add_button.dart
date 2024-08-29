@@ -4,8 +4,10 @@ class CustomAddButton extends StatelessWidget {
   const CustomAddButton({
     super.key,
     this.onPressed,
+    this.isLoading = false,
   });
   final void Function()? onPressed;
+  final bool isLoading;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -18,11 +20,15 @@ class CustomAddButton extends StatelessWidget {
             ),
             backgroundColor: const Color(0xFF63FFDA)),
         onPressed: onPressed,
-        child: const Text(
-          'Add',
-          style: TextStyle(
-              color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
-        ),
+        child: isLoading
+            ? CircularProgressIndicator()
+            : Text(
+                'Add',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              ),
       ),
     );
   }
