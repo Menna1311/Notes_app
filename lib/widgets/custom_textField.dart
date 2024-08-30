@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 
 class CustomTextfield extends StatelessWidget {
   const CustomTextfield(
-      {super.key, required this.hint, this.contentPadding, this.onSaved});
+      {super.key,
+      required this.hint,
+      this.contentPadding,
+      this.onSaved,
+      this.onChanged});
   final String hint;
   final EdgeInsetsGeometry? contentPadding;
   final void Function(String?)? onSaved;
+  final Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -16,6 +21,7 @@ class CustomTextfield extends StatelessWidget {
           return null;
         }
       },
+      onChanged: onChanged,
       onSaved: onSaved,
       cursorColor: Colors.blueAccent,
       decoration: InputDecoration(
